@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trau.study.mapper.StudentMapper">
+    <resultMap id="studyMap" type="com.trau.study.model.student">
+        <id column="NEW_ID" property="newId" jdbcType="VARCHAR"/>
+        <result column="NEW_TITLE" property="newTitle" jdbcType="VARCHAR"/>
+        <result column="NEW_IMG" property="newImg" jdbcType="VARCHAR"/>
+        <result column="NEW_PINLUN" property="newPinlun" jdbcType="VARCHAR"/>
+        <result column="STATUS" property="Status" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="studyAll">
+        NEW_ID,NEW_TITLE,NEW_IMG,NEW_PINLUN,STATUS
+    </sql>
+
+    <select id="queryStudentById" resultMap="studyMap">
+        select
+        <include refid="studyAll"/>
+        from studynew
+        where NEW_ID = #{newId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryAllById" resultMap="studyMap">
+        select
+        <include refid="studyAll"/>
+        from studynew
+    </select>
+
+    <delete id="deleteStudentById" parameterType="com.trau.study.model.student">
+        delete  from studynew where NEW_ID=#{newId,jdbcType=VARCHAR}
+    </delete>
+
+</mapper>

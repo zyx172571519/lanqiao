@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trau.study.mapper.UserMapper">
+    <resultMap id="userMap" type="com.trau.study.model.user">
+        <id column="U_ID" property="uId" jdbcType="VARCHAR"/>
+        <result column="U_NAME" property="uName" jdbcType="VARCHAR"/>
+        <result column="U_PASSWORD" property="uPassword" jdbcType="VARCHAR"/>
+        <result column="STATUS" property="Status" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="userAll">
+        U_ID,U_NAME,U_PASSWORD,STATUS
+    </sql>
+
+    <insert id="insertUserById" parameterType="com.trau.study.model.user">
+        insert into usernew
+        (<include refid="userAll"/>)
+        values(#{uId,jdbcType=VARCHAR},#{uName,jdbcType=VARCHAR},#{uPassword,jdbcType=VARCHAR},
+        #{Status,jdbcType=VARCHAR})
+    </insert>
+
+
+    <select id="queryUserById" resultMap="userMap" parameterType="com.trau.study.model.user">
+        select
+        <include refid="userAll"/>
+        from usernew
+    </select>
+
+
+    <select id="queryUserByid" resultMap="userMap" parameterType="com.trau.study.model.user">
+        select
+        <include refid="userAll"/>
+        from usernew
+        where U_ID=#{uId,jdbcType=VARCHAR}
+    </select>
+
+
+
+</mapper>
